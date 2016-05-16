@@ -12,7 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 
@@ -33,6 +36,8 @@ public class CFTP extends JFrame {
 	private String pwd;
 	private String path;
 	private int port;
+	File file;
+	String parhfile;
 
 	/**
 	 * Launch the application.
@@ -88,6 +93,19 @@ public class CFTP extends JFrame {
 		textField_1.setColumns(10);
 
 		JButton button = new JButton("文件选择");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser fileChooser = new JFileChooser();
+				fileChooser.showDialog(CFTP.this, "确定");
+				// 目录、文件
+				 fileChooser.setFileSelectionMode(1);
+
+				file = fileChooser.getSelectedFile();
+				textField_1.setText(file.getName());
+				parhfile=file.getAbsolutePath();
+				
+			}
+		});
 
 		JButton button3 = new JButton("上    传");
 		button3.addActionListener(new ActionListener() {
@@ -109,7 +127,7 @@ public class CFTP extends JFrame {
 
 				if (username.equals("孙雅晖")) {
 					if (pwd.equals("123456")) {
-						ConUtil.getCon(path, port);
+						ConUtil.getCon(path, port,parhfile);
 						textArea.append("连接成功");
 					}else{
 						textArea.append("密码有误，连接失败");
