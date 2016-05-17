@@ -38,7 +38,7 @@ public class CFTP extends JFrame {
 	File file;
 	String parhfile;
 	String name;
-	long lengh;
+	boolean flag =false;
 
 	/**
 	 * Launch the application.
@@ -102,10 +102,10 @@ public class CFTP extends JFrame {
 				 fileChooser.setFileSelectionMode(1);
 
 				file = fileChooser.getSelectedFile();
-				textField_1.setText(file.getName());
-			    name = file.getName();
+				name = file.getName();
+				textField_1.setText(name);
 				parhfile=file.getAbsolutePath();
-				lengh =file.getTotalSpace()/(1024*1024);
+				
 				
 			}
 		});
@@ -123,15 +123,16 @@ public class CFTP extends JFrame {
 				pwd = textField4.getText();
 				
 				if (username.equals("q")) {
-					if (pwd.equals("1")) {
-						textArea.append("连接成功");
+					if (pwd.equals("1")) {					
+						textArea.append("连接成功"+"\t\n");
 						button3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
 								path = textField1.getText();
 								port = Integer.parseInt(textField2.getText());
-								ConUtil.getCon(path, port,parhfile);
+								String  a= ConUtil.getCon(path, port,parhfile);
 								textArea.append("文件名："+name+"\t\n");
-								textArea.append("文件大小："+lengh+"kb"+"\t\n");
+								textArea.append(a+"\t\n");
+								textArea.append("~~~~~~~~~~~~"+"\t\n");
 								
 							}
 						});

@@ -28,7 +28,6 @@ public class SFTP extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
-	JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -63,21 +62,22 @@ public class SFTP extends JFrame {
 		JLabel label = new JLabel("端口号");
 		
 		JButton btnNewButton = new JButton("启动服务器");
-		textArea = new JTextArea();
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int port = Integer.parseInt(textField.getText());
-				textArea.append("连接成功");
+				
 				try {
 					
 					SerUtil.getser(port);
-					
+				
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		
 		});
+		
+		JButton button = new JButton("中断");
 		
 		
 		
@@ -87,9 +87,9 @@ public class SFTP extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(34)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(textArea, Alignment.LEADING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(button)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(textField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(label, Alignment.LEADING)))
@@ -104,11 +104,10 @@ public class SFTP extends JFrame {
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(button)
+					.addContainerGap(32, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }
