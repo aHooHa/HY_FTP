@@ -10,7 +10,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
@@ -38,6 +37,8 @@ public class CFTP extends JFrame {
 	private int port;
 	File file;
 	String parhfile;
+	String name;
+	long lengh;
 
 	/**
 	 * Launch the application.
@@ -102,33 +103,38 @@ public class CFTP extends JFrame {
 
 				file = fileChooser.getSelectedFile();
 				textField_1.setText(file.getName());
+			    name = file.getName();
 				parhfile=file.getAbsolutePath();
+				lengh =file.getTotalSpace()/(1024*1024);
 				
 			}
 		});
 
-		JButton button3 = new JButton("上    传");
-		button3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-			}
-		});
+		
 
 		JLabel lblNewLabel = new JLabel("文件描素");
 
 		JButton button_2 = new JButton("连接");
+		JButton button3 = new JButton("上    传");
 		JTextArea textArea = new JTextArea();
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				username = textField3.getText();
 				pwd = textField4.getText();
-				path = textField1.getText();
-				port = Integer.parseInt(textField2.getText());
-
-				if (username.equals("孙雅晖")) {
-					if (pwd.equals("123456")) {
-						ConUtil.getCon(path, port,parhfile);
+				
+				if (username.equals("q")) {
+					if (pwd.equals("1")) {
 						textArea.append("连接成功");
+						button3.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								path = textField1.getText();
+								port = Integer.parseInt(textField2.getText());
+								ConUtil.getCon(path, port,parhfile);
+								textArea.append("文件名："+name+"\t\n");
+								textArea.append("文件大小："+lengh+"kb"+"\t\n");
+								
+							}
+						});
 					}else{
 						textArea.append("密码有误，连接失败");
 					}
@@ -139,6 +145,7 @@ public class CFTP extends JFrame {
 
 		});
 
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
 				.createSequentialGroup().addGap(48)

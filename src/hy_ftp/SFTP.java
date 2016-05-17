@@ -67,9 +67,11 @@ public class SFTP extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int port = Integer.parseInt(textField.getText());
+				textArea.append("连接成功");
 				try {
+					
 					SerUtil.getser(port);
-					textArea.append("连接成功");
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
