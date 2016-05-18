@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import javax.swing.JTextArea;
 
 public class SFTP extends JFrame {
 
@@ -77,8 +76,6 @@ public class SFTP extends JFrame {
 		
 		});
 		
-		JButton button = new JButton("中断");
-		
 		
 		
 		
@@ -87,12 +84,10 @@ public class SFTP extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(34)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(button)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(textField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(label, Alignment.LEADING)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(textField, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(label, Alignment.LEADING))
 					.addContainerGap(57, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -104,9 +99,7 @@ public class SFTP extends JFrame {
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(button)
-					.addContainerGap(32, Short.MAX_VALUE))
+					.addContainerGap(65, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

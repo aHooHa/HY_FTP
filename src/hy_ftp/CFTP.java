@@ -38,7 +38,7 @@ public class CFTP extends JFrame {
 	File file;
 	String parhfile;
 	String name;
-	boolean flag =false;
+	double len;
 
 	/**
 	 * Launch the application.
@@ -105,6 +105,10 @@ public class CFTP extends JFrame {
 				name = file.getName();
 				textField_1.setText(name);
 				parhfile=file.getAbsolutePath();
+				File ffff =new File(parhfile);
+				 len =ffff.length()/(1024.0);
+				 
+				
 				
 				
 			}
@@ -117,21 +121,24 @@ public class CFTP extends JFrame {
 		JButton button_2 = new JButton("连接");
 		JButton button3 = new JButton("上    传");
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				username = textField3.getText();
 				pwd = textField4.getText();
 				
 				if (username.equals("q")) {
-					if (pwd.equals("1")) {					
+					if (pwd.equals("1")) {
+						textArea.setText("");
 						textArea.append("连接成功"+"\t\n");
 						button3.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent arg0) {
 								path = textField1.getText();
 								port = Integer.parseInt(textField2.getText());
-								String  a= ConUtil.getCon(path, port,parhfile);
+								ConUtil.getCon(path, port,parhfile);
 								textArea.append("文件名："+name+"\t\n");
-								textArea.append(a+"\t\n");
+								textArea.append("文件大小"+Math.round(len)+"kb"+"\t\n");
+								textArea.append("上传成功"+"\t\n");
 								textArea.append("~~~~~~~~~~~~"+"\t\n");
 								
 							}
