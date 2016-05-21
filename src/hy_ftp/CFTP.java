@@ -68,12 +68,12 @@ public class CFTP extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JLabel label_1 = new JLabel("‰∏ªÊú∫Âêç");
+		JLabel label_1 = new JLabel("µÿ÷∑");
 
 		textField1 = new JTextField();
 		textField1.setColumns(10);
 
-		JLabel label_2 = new JLabel("Á´ØÂè£Âè∑");
+		JLabel label_2 = new JLabel("∂Àø⁄");
 
 		textField2 = new JTextField();
 		textField2.setColumns(10);
@@ -81,45 +81,40 @@ public class CFTP extends JFrame {
 		textField3 = new JTextField();
 		textField3.setColumns(10);
 
-		JLabel label_3 = new JLabel("Áî®Êà∑");
+		JLabel label_3 = new JLabel("”√ªß");
 
-		JLabel label_4 = new JLabel("ÂØÜÁ†Å");
+		JLabel label_4 = new JLabel("√‹¬Î");
 
 		textField4 = new JTextField();
 		textField4.setColumns(10);
 
-		JLabel label = new JLabel("Êñá‰ª∂Âêç");
+		JLabel label = new JLabel("Œƒº˛");
 
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 
-		JButton button = new JButton("Êñá‰ª∂ÈÄâÊã©");
+		JButton button = new JButton("—°‘ÒŒƒº˛");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.showDialog(CFTP.this, "Á°ÆÂÆö");
-				// ÁõÆÂΩï„ÄÅÊñá‰ª∂
-				 fileChooser.setFileSelectionMode(1);
+				fileChooser.showDialog(CFTP.this, "true");
+				 fileChooser.setFileSelectionMode(2);
 
 				file = fileChooser.getSelectedFile();
 				name = file.getName();
 				textField_1.setText(name);
 				parhfile=file.getAbsolutePath();
 				File ffff =new File(parhfile);
-				 len =ffff.length()/(1024.0);
-				 
-				
-				
-				
+				len =ffff.length()/(1024.0);
 			}
 		});
 
 		
 
-		JLabel lblNewLabel = new JLabel("Êñá‰ª∂ÊèèÁ¥†");
+		JLabel lblNewLabel = new JLabel("Œƒº˛√Ë ˆ");
 
-		JButton button_2 = new JButton("ËøûÊé•");
-		JButton button3 = new JButton("‰∏ä    ‰º†");
+		JButton button_2 = new JButton("¡¨Ω”");
+		JButton button3 = new JButton("…œ¥´");
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
 		button_2.addActionListener(new ActionListener() {
@@ -129,25 +124,39 @@ public class CFTP extends JFrame {
 				
 				if (username.equals("q")) {
 					if (pwd.equals("1")) {
+						
 						textArea.setText("");
-						textArea.append("ËøûÊé•ÊàêÂäü"+"\t\n");
+						textArea.append("¡¨Ω”≥…π¶"+"\t\n");
+						
 						button3.addActionListener(new ActionListener() {
+							
 							public void actionPerformed(ActionEvent arg0) {
 								path = textField1.getText();
 								port = Integer.parseInt(textField2.getText());
+								long start =System.currentTimeMillis();
 								ConUtil.getCon(path, port,parhfile);
-								textArea.append("Êñá‰ª∂ÂêçÔºö"+name+"\t\n");
-								textArea.append("Êñá‰ª∂Â§ßÂ∞è"+Math.round(len)+"kb"+"\t\n");
-								textArea.append("‰∏ä‰º†ÊàêÂäü"+"\t\n");
+								long end =System.currentTimeMillis();
+								textArea.append("Œƒº˛√˚:"+name+"\t\n");
+								if(len>1024){
+									textArea.append("Œƒº˛¥Û–°:"+Math.ceil(len)/(1024)+"M"+"\t\n");	
+								}else{
+								textArea.append("Œƒº˛¥Û–°"+Math.ceil(len)+"kb"+"\t\n");}
+								textArea.append("…œ¥´≥…π¶"+"\t\n");
+								
+								double time = end-start;
+								if(time>6000){
+									textArea.append(" ±º‰"+time/(6000)+"∑÷÷”"+":"+time%(6000)+"√Î"+"\t\n");
+								}else{
+								textArea.append(" ±º‰"+time/(1000)+"√Î"+"\t\n");}
 								textArea.append("~~~~~~~~~~~~"+"\t\n");
 								
 							}
 						});
 					}else{
-						textArea.append("ÂØÜÁ†ÅÊúâËØØÔºåËøûÊé•Â§±Ë¥•");
+						textArea.append("√‹¬Î”–ŒÛ");
 					}
 				}else{
-					textArea.append("‰∏çÂ≠òÂú®ËØ•Áî®Êà∑ÔºåËøûÊé•Â§±Ë¥•");
+					textArea.append("≤ª¥Ê‘⁄∏√”√ªß");
 				}
 			}
 
@@ -155,85 +164,79 @@ public class CFTP extends JFrame {
 
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(48)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(
-						gl_contentPane
-								.createSequentialGroup()
-								.addGroup(
-										gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-														.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 218,
-																Short.MAX_VALUE)
-														.addComponent(lblNewLabel).addComponent(
-																textArea, GroupLayout.DEFAULT_SIZE, 220,
-																Short.MAX_VALUE))
-												.addGroup(
-														gl_contentPane.createSequentialGroup()
-																.addGroup(gl_contentPane
-																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(label_1).addComponent(label_3))
-																.addPreferredGap(ComponentPlacement.RELATED)
-																.addGroup(gl_contentPane
-																		.createParallelGroup(Alignment.LEADING, false)
-																		.addComponent(textField3).addComponent(
-																				textField1, GroupLayout.DEFAULT_SIZE,
-																				126, Short.MAX_VALUE))
-																.addGap(18)
-																.addGroup(gl_contentPane
-																		.createParallelGroup(Alignment.LEADING)
-																		.addComponent(label_2).addComponent(label_4))))
-								.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_contentPane.createSequentialGroup().addComponent(label).addGap(188)))
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane
-								.createParallelGroup(
-										Alignment.TRAILING)
-								.addGroup(
-										gl_contentPane.createSequentialGroup()
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-														.addComponent(textField2, GroupLayout.DEFAULT_SIZE, 89,
-																Short.MAX_VALUE)
-														.addComponent(textField4, GroupLayout.DEFAULT_SIZE, 89,
-																Short.MAX_VALUE))
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(button_2))
-								.addGroup(gl_contentPane.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(button)))
-						.addGroup(gl_contentPane.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(button3)))
-				.addContainerGap()));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-						.addGroup(gl_contentPane
-								.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_1)
-								.addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_2))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(63).addComponent(label))
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(18)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textField3, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(label_3).addComponent(label_4)
-												.addComponent(textField4, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(button_2))))
-						.addGap(2)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(button))
-						.addGap(10)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_contentPane.createSequentialGroup().addComponent(lblNewLabel)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(textArea,
-												GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-								.addComponent(button3))
-						.addContainerGap(29, Short.MAX_VALUE)));
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_3)
+								.addComponent(label_1))
+							.addGap(20)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textArea, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField3)
+										.addComponent(textField1, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(label_4)
+										.addComponent(label_2)))
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(textField2, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+										.addComponent(textField4, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(button_2))
+								.addComponent(button)
+								.addComponent(button3)))
+						.addComponent(label)
+						.addComponent(lblNewLabel))
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_2)
+						.addComponent(label_1))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(button_2)
+						.addComponent(label_4)
+						.addComponent(label_3)
+						.addComponent(textField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(35)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(button)
+									.addGap(10))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)))
+							.addGap(11)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+								.addComponent(button3)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addComponent(label)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblNewLabel)
+							.addGap(111)))
+					.addContainerGap())
+		);
 		contentPane.setLayout(gl_contentPane);
 	}
 }

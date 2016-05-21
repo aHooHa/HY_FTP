@@ -1,10 +1,11 @@
 package hy_ftp;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -15,24 +16,32 @@ public class ConUtil {
 
 			Socket sk = new Socket(path, port);
 			File f = new File(filepath);
+			
+			 DataInputStream fis = new DataInputStream(new BufferedInputStream(new FileInputStream(f)));  
+             DataOutputStream ps = new DataOutputStream(sk.getOutputStream()); 
+             
+             ps.writeUTF(f.getName());
+             ps.flush();
 
-			// 鍐欐枃浠跺悕瀛�
-			PrintWriter pw = new PrintWriter(sk.getOutputStream());
-			pw.println(f.getName());
-			pw.flush();
 
-			// 璇绘枃浠�
-			BufferedReader bis = new BufferedReader(new FileReader(f));
-			String str = bis.readLine();
-			while (str != null) {
-				// 鍐欐枃浠�
-				pw.println(str);
-				pw.flush();
-				str = bis.readLine();
-			}
-			bis.close();
-			pw.close();
-			sk.close();
+             int bufferSize = 8192;  
+             byte[] buf = new byte[bufferSize];  
+            
+             while (true) {  
+            	 int read = 0;
+                 if (fis != null) {  
+                     read = fis.read(buf);  
+                 }  
+
+                 if (read == -1) {  
+                     break;  
+                 }  
+                 ps.write(buf, 0, read);  
+             }  
+             ps.flush();  
+             fis.close();
+             ps.close();
+             sk.close();     
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

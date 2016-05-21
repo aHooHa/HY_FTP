@@ -1,11 +1,11 @@
 package hy_ftp;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,26 +16,27 @@ public class SerUtil {
 		ServerSocket sk = new ServerSocket(port);
 		Socket s = sk.accept();
 
-		// 读文件名
-		BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		String filename = br.readLine();
+		DataInputStream input = new DataInputStream(s.getInputStream());
+		String filename = input.readUTF();
 
-		// 新建文件
 		File file = new File("D:\\ftp\\" + filename);
-		// 读文件
-		BufferedWriter bop = new BufferedWriter(new FileWriter(file, true));
-		String str = br.readLine();
-		while (str != null) {
-			// 写文件
-			bop.write(str);
-			bop.flush();
-			bop.newLine();
-			str = br.readLine();
-		}
-		bop.close();
-		br.close();
-		s.close();
-		sk.close();
-
+		byte[] buf = new byte[8192];
+		DataOutputStream fis = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+		 while (true) {  
+             int read = 0;  
+             if (input != null) {  
+                 read = input.read(buf);  
+             }  
+             
+             if (read == -1) {  
+                 break;  
+             }  
+             
+             fis.write(buf, 0, read);  
+         }  
+		 fis.close();
+		 input.close();
+		 s.close();
+		 sk.close();
 	}
 }

@@ -58,9 +58,9 @@ public class SFTP extends JFrame {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JLabel label = new JLabel("ç«¯å£å·");
+		JLabel label = new JLabel("¶Ë¿Ú");
 		
-		JButton btnNewButton = new JButton("å¯åŠ¨æœåŠ¡å™¨");
+		JButton btnNewButton = new JButton("Æô¶¯·şÎñÆ÷");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int port = Integer.parseInt(textField.getText());
