@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
 
 public class ConUtil {
 
@@ -27,9 +28,16 @@ public class ConUtil {
              input = new DataInputStream(sk.getInputStream());
              
              
-             String len =MDUtil.getMD5(f.getName());
-             ps.writeUTF(len);
-             ps.flush();
+             String len;
+			try {
+				len = MDUtil.getMD5(f);
+				 ps.writeUTF(len);
+	             ps.flush();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
              
              
              String miao = input.readUTF();
