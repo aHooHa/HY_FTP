@@ -133,21 +133,14 @@ public class CFTP extends JFrame {
 							public void actionPerformed(ActionEvent arg0) {
 								path = textField1.getText();
 								port = Integer.parseInt(textField2.getText());
-								long start =System.currentTimeMillis();
-								ConUtil.getCon(path, port,parhfile);
-								long end =System.currentTimeMillis();
+								String  respon =ConUtil.getCon(path, port,parhfile);
 								textArea.append("文件名:"+name+"\t\n");
 								if(len>1024){
 									textArea.append("文件大小:"+Math.ceil(len)/(1024)+"M"+"\t\n");	
 								}else{
 								textArea.append("文件大小"+Math.ceil(len)+"kb"+"\t\n");}
-								textArea.append("上传成功"+"\t\n");
+								textArea.append(respon+"\t\n");
 								
-								double time = end-start;
-								if(time>6000){
-									textArea.append("时间"+time/(6000)+"分钟"+":"+time%(6000)+"秒"+"\t\n");
-								}else{
-								textArea.append("时间"+time/(1000)+"秒"+"\t\n");}
 								textArea.append("~~~~~~~~~~~~"+"\t\n");
 								
 							}

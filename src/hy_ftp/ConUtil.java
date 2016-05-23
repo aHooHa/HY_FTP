@@ -11,18 +11,36 @@ import java.net.UnknownHostException;
 
 public class ConUtil {
 
-	public static void getCon(String path, int port, String filepath) {
+	public static String getCon(String path, int port, String filepath) {
+		Socket sk = null;
+		 DataInputStream fis = null;
+		  DataOutputStream ps = null ;
+		  DataInputStream input;
+		
 		try {
 
-			Socket sk = new Socket(path, port);
+			sk = new Socket(path, port);
 			File f = new File(filepath);
 			
-			 DataInputStream fis = new DataInputStream(new BufferedInputStream(new FileInputStream(f)));  
-             DataOutputStream ps = new DataOutputStream(sk.getOutputStream()); 
+			 fis = new DataInputStream(new BufferedInputStream(new FileInputStream(f)));  
+             ps = new DataOutputStream(sk.getOutputStream()); 
+             input = new DataInputStream(sk.getInputStream());
              
+             
+             String len =MDUtil.getMD5(f.getName());
+             ps.writeUTF(len);
+             ps.flush();
+             
+             
+             String miao = input.readUTF();
+             if(miao.equals("秒传")){
+            	 input.close();
+            	 ps.close();
+            	 fis.close();
+            	 return miao;
+             } 
              ps.writeUTF(f.getName());
              ps.flush();
-
 
              int bufferSize = 8192;  
              byte[] buf = new byte[bufferSize];  
@@ -38,16 +56,28 @@ public class ConUtil {
                  }  
                  ps.write(buf, 0, read);  
              }  
-             ps.flush();  
-             fis.close();
-             ps.close();
-             sk.close();     
+                 
 
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally {
+			 try {
+				ps.flush();
+				 fis.close();
+	             ps.close();
+	             sk.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+            
 		}
-
+		
+		return "上传成功";
+		
+		
+		
 	}
 }
